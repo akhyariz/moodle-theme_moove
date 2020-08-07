@@ -37,8 +37,6 @@ function theme_moove_get_extra_scss($theme) {
 
     $scss .= theme_moove_set_topfooterimg($theme);
 
-    $scss .= theme_moove_set_loginbgimg($theme);
-
     return $scss;
 }
 
@@ -88,8 +86,10 @@ function theme_moove_set_topfooterimg($theme) {
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_moove_set_loginbgimg($theme) {
+function theme_moove_get_loginbgimg() {
     global $OUTPUT;
+
+    $theme = theme_config::load('moove');
 
     $loginbgimg = $theme->setting_file_url('loginbgimg', 'loginbgimg');
 
@@ -97,9 +97,7 @@ function theme_moove_set_loginbgimg($theme) {
         $loginbgimg = $OUTPUT->image_url('login_bg', 'theme');
     }
 
-    $headercss = "#page-login-index.moove-login #page-wrapper #page {background-image: url('$loginbgimg');}";
-
-    return $headercss;
+    return $loginbgimg;
 }
 
 /**

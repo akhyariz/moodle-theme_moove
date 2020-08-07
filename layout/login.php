@@ -24,17 +24,36 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$loginposition = theme_moove_get_setting('loginposition');
+
+$template = 'theme_moove/login_side';
+$extraclasses = [];
+switch($loginposition) {
+    case 'center':
+        $extraclasses[] = 'login-center';
+        $template = 'theme_moove/login_center';
+        break;
+    case 'right':
+        $extraclasses[] = 'login-right';
+        break;
+    case 'left':
+    default:
+        $extraclasses[] = 'login-left';
+        break;
+}
+
 $extraclasses[] = 'moove-login';
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
-    'bodyattributes' => $bodyattributes
+    'bodyattributes' => $bodyattributes,
+    'loginbg' => theme_moove_get_loginbgimg()
 ];
 
 if ($this->page->pagetype == 'login-signup') {
     $templatecontext['logourl'] = $OUTPUT->get_logo();
 }
 
-echo $OUTPUT->render_from_template('theme_moove/login', $templatecontext);
+echo $OUTPUT->render_from_template($template, $templatecontext);

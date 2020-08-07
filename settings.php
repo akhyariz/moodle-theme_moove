@@ -97,6 +97,20 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    // Login box position.
+    $name = 'theme_moove/loginposition';
+    $title = get_string('loginposition', 'theme_moove');
+    $description = get_string('loginposition_desc', 'theme_moove');
+
+    $choices = [
+        'left' => get_string('loginposition_left', 'theme_moove'),
+        'center' => get_string('loginposition_center', 'theme_moove'),
+        'right' => get_string('loginposition_right', 'theme_moove')
+    ];
+
+    $setting = new admin_setting_configselect($name, $title, $description,'left', $choices);
+    $page->add($setting);
+
     // Variable $brand-color.
     // We use an empty default value because the default colour should come from the preset.
     $name = 'theme_moove/brandcolor';
